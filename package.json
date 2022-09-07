@@ -1,0 +1,19 @@
+{
+  "name": "mynotes",
+  "version": "1.0.0",
+  "description": "a notes app where you can add and/or delete your notes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsnr-code/MyNotes.git"
+  },
+  "author": "Rishad Nero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rsnr-code/MyNotes/issues"
+  },
+  "homepage": "https://github.com/rsnr-code/MyNotes#readme"
+}
