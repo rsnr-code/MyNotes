@@ -1,0 +1,21 @@
+
+<h1 class="mt-4">MyNotes Notepad</h1>
+<ul>
+<% note.forEach( el => { %>
+    <li class='notesItem' data-id='<%=el._id%>'>
+    <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.notes %></span>
+    <span class='del'> Delete </span>
+    </li>
+    <% }) %>    
+    </ul>
+
+    <h2 class="lead mb-3"><%= user.userName %> has <%= left %> things left to do.</h2>
+
+    <form action="/notes/createNotes" method='POST'>
+        <input type="text" placeholder="Enter Notes" name='noteItem'>
+        <input type="submit">
+    </form>
+
+    <a href="/logout" class="btn btn-secondary">Logout</a>
+
+    <script src="js/main.js"></script>

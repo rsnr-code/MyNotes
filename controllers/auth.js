@@ -8,7 +8,7 @@ exports.getIndex = (req, res) => {
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect('/notepad')
+    return res.redirect('/notes')
   }
   res.render('login', {
     title: 'Login'
@@ -35,7 +35,7 @@ exports.postLogin = (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err) }
       req.flash('success_msg', { msg: 'Success! You are logged in.' })
-      res.redirect(req.session.returnTo || '/notepad')
+      res.redirect(req.session.returnTo || '/notes')
     })
   })(req, res, next)
 }
@@ -53,7 +53,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/notepad')
+    return res.redirect('/notes')
   }
   res.render('signup', {
     title: 'Create Account'
