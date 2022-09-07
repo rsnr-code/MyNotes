@@ -3,6 +3,7 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const mainRoutes = require("./routes/main");
 const mongoose = require('mongoose');
+const passport = require('passport');
 const connectDB = require('./config/db');
 const logger = require('morgan');
 const flash = require('express-flash');
@@ -10,6 +11,8 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 require("dotenv").config({ path: "./config/.env" });
+
+require('./config/passport')(passport);
 
 connectDB();
 app.use(logger('dev'))
@@ -29,7 +32,17 @@ app.use(
     })
   )
 
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(flash())
+
+app.use(function(req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+  });
 
 app.use("/", mainRoutes);
 
