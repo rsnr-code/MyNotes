@@ -1,18 +1,29 @@
 const mongoose = require('mongoose')
 
 const NotesSchema = new mongoose.Schema({
-  note: {
+  title: {
     type: String,
     required: false,
+    trim: true
   },
-  completed: {
-    type: Boolean,
+  body: {
+    type: String,
     required: true,
   },
-  userId: {
+  status: {
     type: String,
-    required: true
-  }
+    default: 'public',
+    enum: ['public', 'private'],
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 })
 
 module.exports = mongoose.model('Notes', NotesSchema);
+  

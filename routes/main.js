@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
-const { ensureAuth } = require('../middleware/auth');
+const { ensureGuest } = require('../middleware/auth');
 
-router.get("/", authController.getIndex);
+router.get("/", ensureGuest, authController.getIndex);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get('/logout', authController.logout);
