@@ -101,7 +101,6 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         } 
-        res.redirect("/login");
         req.logIn(user, (err) => {
           if (err) {
             return next(err);

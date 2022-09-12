@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
+const { ensureAuth } = require('../middleware/auth');
 
 router.get("/", authController.getIndex);
 router.get("/login", authController.getLogin);
