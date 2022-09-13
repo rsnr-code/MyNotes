@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo');
 const mainRoutes = require("./routes/main");
 const noteRoutes = require("./routes/notes");
 
+
 require("dotenv").config({ path: "./config/.env" });
 
 require('./config/passport')(passport);
@@ -20,7 +21,7 @@ app.use(logger('dev'))
 
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static('public'))
 
 app.use(

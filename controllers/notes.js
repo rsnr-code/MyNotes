@@ -1,11 +1,12 @@
 const Notes = require("../models/Notes");
+const moment = require('moment')
 
 module.exports = {
-  getNotes: async (req, res) => {
+  getDashboard: async (req, res) => {
     console.log(req.user);
     try {
       const noteItems = await Notes.find({ user: req.user.id }).lean();
-      res.render("notes.ejs", { note: noteItems, name: req.user.userName });
+      res.render("notes", { note: noteItems, name: req.user.userName, moment: moment});
       req.app.set('layout', 'main');
     } catch (err) {
       console.log(err);
@@ -13,9 +14,22 @@ module.exports = {
     }
   },
 
-  createNotes:  (req, res) => {
+  getNotes:  (req, res) => {
       res.render('notes/add');
   },
+
+  createNotes: async (req, res) => {
+    try {
+      req.body.user = req.user.id
+      await Notes.create(req.body)
+      res.redirect('/notes')
+    } catch (err) {
+      console.error(err);
+      res.render('error/500')
+    }
+},
+
+
 
   markComplete: async (req, res) => {
     try {
