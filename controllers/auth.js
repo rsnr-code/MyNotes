@@ -4,6 +4,7 @@ const User = require("../models/User");
 
 exports.getIndex = (req, res) => {
   res.render("index");
+  req.app.set('layout', 'layout');
 };
 
 exports.getLogin = (req, res) => {

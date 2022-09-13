@@ -5,7 +5,7 @@ const { ensureAuth } = require('../middleware/auth')
 
 router.get('/', ensureAuth, notesController.getNotes)
 
-router.post('/createNotes', notesController.createNotes)
+router.get('/add', ensureAuth, notesController.createNotes)
 
 router.put('/markComplete', notesController.markComplete)
 

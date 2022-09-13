@@ -1,14 +1,41 @@
 <h1 class="mt-4">MyNotes Notepad</h1>
 
 <h2 class="lead mb-3">Welcome <%= name %>!</h2>
-
 <% if(note.length > 0){  %>  
-   <p> <%=  %> </p>
+  <table class="striped">
+   <thead>
+      <tr>
+         <th>Title</th>
+         <th>Date</th>
+         <th>Status</th>
+         <th></th>
+      </tr>
+   </thead>
+   <% note.forEach ( el => { %>
+   <tbody class="notes" data-id="<%=el._id%>">
+      <tr>
+         <td><%= el.title %></td>
+         <td><%= el.createdAt %></td>
+         <td><%= el.status %></td>
+         <td></td>
+      </tr> 
+
+      <% }); %>
+   </tbody>
+   
+  </table>
+  
+  
+   <%=  %> 
 <% } else {%>
    <p> no notes for <%= name %> </p>
    <% } %>
 
 
 <a href="/logout" class="btn btn-secondary">Logout</a>
+
+<div class="fixed-action-btn">
+   <a href="notes/add" class="btn-floating btn-large waves-effect waves-light red"><i class="fas fa-plus"></i></a>
+</div>
 
 <script src="js/main.js"></script>
