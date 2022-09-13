@@ -1,0 +1,33 @@
+<h1>Thoughts</h1>
+
+<div class="row">
+    <% if(notes.length > 0){  %>  
+    <% notes.forEach ( el => { %>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+
+                </div>
+                <div class="card-content center-align">
+                    <h5><%= el.title %></h5>
+                    <p><%= el.body %></p>
+                    <br>
+                    <div class="chip">
+                        <a href="/notes/user/<%= el._id %>"><%= el.user.userName %></a>
+                    </div>
+                </div>
+                <card-action class="center-align">
+                    <a href="/notes/<%= el._id %>" class="btn grey">Read More</a>
+                </card-action>
+            </div>
+        </div>
+        <% }); %>
+
+    <% } else { %>
+        
+        <p>No Stories for <%= name %></p>
+
+    <% } %>
+
+
+</div>

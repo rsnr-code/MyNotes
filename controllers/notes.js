@@ -18,6 +18,18 @@ module.exports = {
       res.render('notes/add');
   },
 
+  getPublicNotes: async (req, res) => {
+    try {
+      const notes = await Notes.find({ status: 'public'}).populate('user').sort({ createdAt: 'desc'}).lean()
+
+      res.render('thoughts/index', {notes, user: req.user.userName})
+      req.app.set('layout', 'main')
+    } catch(err) {
+      console.error(err)
+      res.render('error/500')
+    }
+},
+
   createNotes: async (req, res) => {
     try {
       req.body.user = req.user.id
