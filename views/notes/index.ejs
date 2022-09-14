@@ -1,4 +1,4 @@
-<h1>Thoughts</h1>
+<h1>Notes</h1>
 
 <div class="row">
     <% if(notes.length > 0){  %>  
@@ -6,11 +6,11 @@
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image">
-
+                   <span> <%- editIcon(el.user, loggedUser, el._id) %> </span>
                 </div>
                 <div class="card-content center-align">
                     <h5><%= el.title %></h5>
-                    <p><%= el.body %></p>
+                    <p><%= stripTags(truncate(el.body, 150)) %></p>
                     <br>
                     <div class="chip">
                         <a href="/notes/user/<%= el._id %>"><%= el.user.userName %></a>

@@ -1,6 +1,22 @@
 const Notes = require("../models/Notes");
 const moment = require('moment')
 
+const {
+  formatDate,
+  stripTags,
+  truncate,
+  editIcon,
+  select,
+} = require('../helpers/ejs')
+
+const express = require('express')
+const app = express()
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null
+  next()
+})
+
+
 module.exports = {
   getDashboard: async (req, res) => {
     console.log(req.user);
@@ -20,9 +36,9 @@ module.exports = {
 
   getPublicNotes: async (req, res) => {
     try {
-      const notes = await Notes.find({ status: 'public'}).populate('user').sort({ createdAt: 'desc'}).lean()
-
-      res.render('thoughts/index', {notes, user: req.user.userName})
+      const loggedUser = req.user
+      const notes = await Notes.find({ status: 'public'}).populate('user').sort({ createdAt: 'desc'}).lean();
+      res.render('notes/index', {notes, user: req.user.userName, stripTags, truncate, editIcon, loggedUser})
       req.app.set('layout', 'main')
     } catch(err) {
       console.error(err)
@@ -39,46 +55,24 @@ module.exports = {
       console.error(err);
       res.render('error/500')
     }
-},
-
-
-
-  markComplete: async (req, res) => {
-    try {
-      await Todo.findOneAndUpdate(
-        { _id: req.body.notesIdFromJSFile },
-        {
-          completed: true,
-        }
-      );
-      console.log("Marked Complete");
-      res.json("Marked Complete");
-    } catch (err) {
-      console.log(err);
-    }
   },
-  markIncomplete: async (req, res) => {
-    try {
-      await Notes.findOneAndUpdate(
-        { _id: req.body.notesIdFromJSFile },
-        {
-          completed: false,
-        }
-      );
-      console.log("Marked Incomplete");
-      res.json("Marked Incomplete");
-    } catch (err) {
-      console.log(err);
+
+  getEdit: async (req, res) => {
+      const notes = await Notes.findOne({
+        _id: req.params.id
+      }).lean()
+      
+      if (!notes){
+        return res.render('error/404')
+      }
+
+      if(notes.user != req.user.id) {
+        res.redirect('/notes')
+      }else{
+        res.render('notes/edit', {
+          notes,
+        })
+      }
     }
-  },
-  deleteNotes: async (req, res) => {
-    console.log(req.body.notesIdFromJSFile);
-    try {
-      await Notes.findOneAndDelete({ _id: req.body.notesIdFromJSFile });
-      console.log("Deleted Note");
-      res.json("Deleted It");
-    } catch (err) {
-      console.log(err);
-    }
-  },
-};
+
+}

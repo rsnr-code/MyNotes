@@ -7,12 +7,14 @@ router.get('/', ensureAuth, notesController.getDashboard)
 
 router.get('/add', ensureAuth, notesController.getNotes)
 
+router.get('/index', ensureAuth, notesController.getPublicNotes)
+
+router.get('/edit/:id', ensureAuth, notesController.getEdit)
+
+
+
 router.post('/', ensureAuth, notesController.createNotes)
 
-router.put('/markComplete', notesController.markComplete)
 
-router.put('/markIncomplete', notesController.markIncomplete)
-
-router.delete('/deleteNotes', notesController.deleteNotes)
 
 module.exports = router
