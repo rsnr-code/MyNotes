@@ -14,7 +14,7 @@
    <% note.forEach ( el => { %>
    <tbody class="notes" data-id="<%=el._id%>">
       <tr>
-         <td><%= el.title %></td>
+         <td><a href="notes/<%=el._id%>"><%= el.title %></a></td>
          <td><%= moment(el.createdAt) %></td>
          <td><%= el.status %></td>
          <td></td>

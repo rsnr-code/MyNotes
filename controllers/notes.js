@@ -70,8 +70,27 @@ module.exports = {
         res.redirect('/notes')
       }else{
         res.render('notes/edit', {
-          notes,
+          notes, select
         })
+      }
+    },
+
+    updateNotes: async (req, res) => {
+      let notes = await Notes.findById(req.params.id).lean()
+      
+      if(!notes){
+        return res.render('error/404')
+      }
+
+      if(notes.user != req.user.id) {
+        res.redirect('/notes')
+      }else{
+        notes = await Notes.findOneAndUpdate({ _id: req.params.id }, req.body, {
+          new: true,
+          runValidators: true
+        })
+
+        res.redirect('/notes')
       }
     }
 

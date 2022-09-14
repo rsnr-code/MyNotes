@@ -7,6 +7,7 @@ const connectDB = require('./config/db');
 const logger = require('morgan');
 const flash = require('express-flash');
 const session = require('express-session');
+const methodOverride = require('method-override');
 const MongoStore = require('connect-mongo');
 const mainRoutes = require("./routes/main");
 const noteRoutes = require("./routes/notes");
@@ -32,6 +33,16 @@ app.use(
       store: MongoStore.create({
         mongoUrl: process.env.MONGO_URI,
       }),
+    })
+  )
+
+  app.use(
+    methodOverride(function (req, res) {
+      if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        let method = req.body._method
+        delete req.body._method
+        return method
+      }
     })
   )
 
