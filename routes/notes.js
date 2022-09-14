@@ -17,6 +17,8 @@ router.put('/:id', ensureAuth, notesController.updateNotes)
 
 router.delete('/:id', ensureAuth, notesController.deleteNotes)
 
+router.get('/:id', ensureAuth, notesController.getSingleNotes)
 
+router.get('/user/:userId', ensureAuth, notesController.getUserPage)
 
 module.exports = router

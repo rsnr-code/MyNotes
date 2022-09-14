@@ -102,6 +102,48 @@ module.exports = {
         console.error(err)
         return res.render('error/500')
       }
-    }
+    },
 
+    getSingleNotes: async (req, res) => {
+      try { 
+        const loggedUser = req.user
+        let notes = await Notes.findById(req.params.id)
+        .populate('user')
+        .lean()
+
+      if(!notes){
+        return res.render('error/404')
+      }
+      res.render('notes/show', {
+        notes, 
+        loggedUser,
+        editIcon,
+        stripTags
+      })
+      }catch(err){
+        console.error(err)
+        res.render('error/404')
+      }
+    },
+
+    getUserPage: async (req, res) => {
+      try {
+        const notes = await Notes.find({
+          user: req.params.userId,
+          status: 'public'
+        })
+        .populate('user')
+        .lean()
+
+        res.render('notes/index', {
+          notes,
+          user: req.user.userName,
+          name: req.user.userName
+        })
+
+      }catch(err){
+        console.error(err)
+        res.render('error/404')
+      }
+    }
 }
