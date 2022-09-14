@@ -92,6 +92,16 @@ module.exports = {
 
         res.redirect('/notes')
       }
+    },
+
+    deleteNotes: async (req, res) => {
+      try {
+        await Notes.remove({_id: req.params.id})
+        res.redirect('/notes')
+      }catch(err){
+        console.error(err)
+        return res.render('error/500')
+      }
     }
 
 }

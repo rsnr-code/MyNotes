@@ -17,7 +17,18 @@
          <td><a href="notes/<%=el._id%>"><%= el.title %></a></td>
          <td><%= moment(el.createdAt) %></td>
          <td><%= el.status %></td>
-         <td></td>
+         <td>
+            <a href="/notes/edit/<%=el._id%>" class="btn btn-float">
+               <i class="fas fa-edit"></i>
+           </a>
+
+           <form action="/notes/<%=el._id%>" method="POST" id="delete-form">
+               <input type="hidden" name="_method" value="DELETE">
+               <button type="submit" class="btn red">
+                   <i class="fas fa-trash"></i>
+               </button>
+           </form>
+         </td>
       </tr> 
 
       <% }); %>

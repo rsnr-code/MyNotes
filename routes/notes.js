@@ -15,6 +15,8 @@ router.post('/', ensureAuth, notesController.createNotes)
 
 router.put('/:id', ensureAuth, notesController.updateNotes)
 
+router.delete('/:id', ensureAuth, notesController.deleteNotes)
+
 
 
 module.exports = router
