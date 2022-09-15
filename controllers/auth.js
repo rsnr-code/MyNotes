@@ -3,8 +3,8 @@ const validator = require("validator");
 const User = require("../models/User");
 
 exports.getIndex = (req, res) => {
+  req.app.set('layout', 'layout')
   res.render("index");
-  req.app.set('layout', 'layout');
 };
 
 exports.getLogin = (req, res) => {

@@ -1,3 +1,22 @@
 .fa-small {
+    size: 20px;
+}
+
+.fa-edit {
+    font-size: 14px !important;
+}
+
+.fa-trash {
+    font-size: 16px !important;
+    
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.card-image {
     font-size: 16px !important;
 }

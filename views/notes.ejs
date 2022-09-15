@@ -1,7 +1,20 @@
 <h1 class="mt-4">MyNotes HomePage</h1>
 
 <h2 class="lead mb-3">Welcome <%= name %>!</h2>
+
+
+<% if (locals.messages.errors) { %>
+   <% messages.errors.forEach( el => { %>
+     <div class="alert alert-warning alert-dismissible fade show" role="alert">
+       <%= el.msg %>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+     </div>
+   <% }) %>    
+<% } %>
+   
+
 <% if(note.length > 0){  %>  
+   
   <table class="striped">
    <thead>
       <tr>
@@ -17,7 +30,7 @@
          <td><a href="notes/<%=el._id%>"><%= el.title %></a></td>
          <td><%= moment(el.createdAt) %></td>
          <td><%= el.status %></td>
-         <td>
+         <td class="buttons">
             <a href="/notes/edit/<%=el._id%>" class="btn btn-float">
                <i class="fas fa-edit"></i>
            </a>
