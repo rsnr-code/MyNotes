@@ -58,7 +58,7 @@ module.exports = {
       await Notes.create(req.body)
       const flashMessage = [];
         if (flashMessage){
-          flashMessage.push({msg: 'Note created!'});
+          flashMessage.push({msg: 'You just created a new note!'});
           }
         if(flashMessage.length){
           req.flash("errors", flashMessage);
@@ -124,7 +124,7 @@ module.exports = {
         await Notes.remove({_id: req.params.id});
         const flashMessage = [];
         if (flashMessage){
-          flashMessage.push({msg: 'Note deleted!'});
+          flashMessage.push({msg: 'Your note has been deleted!'});
           }
         if(flashMessage.length){
           req.flash("errors", flashMessage);
