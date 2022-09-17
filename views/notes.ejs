@@ -28,7 +28,7 @@
    <tbody class="notes" data-id="<%=el._id%>">
       <tr>
          <td><a href="notes/<%=el._id%>"><%= el.title %></a></td>
-         <td><%= moment(el.createdAt) %></td>
+         <td><%= formatDate(el.createdAt, 'Do MMMM, YYYY') %></td>
          <td><%= el.status %></td>
          <td class="buttons">
             <a href="/notes/edit/<%=el._id%>" class="btn btn-float">

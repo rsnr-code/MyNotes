@@ -24,7 +24,7 @@ module.exports = {
     try {
       const noteItems = await Notes.find({ user: req.user.id }).lean();
       req.app.set('layout', 'main');
-      res.render("notes", { note: noteItems, name: req.user.userName, moment: moment}); 
+      res.render("notes", { note: noteItems, name: req.user.userName, moment: moment, formatDate}); 
     } catch (err) {
       console.log(err);
       res.render('error/500');
