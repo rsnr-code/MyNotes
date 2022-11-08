@@ -28,3 +28,27 @@
     bottom: 5%;
 }
 
+.logo {
+    text-decoration: none;
+}
+
+.logo:hover {
+    color: black;
+}
+
+.greeting {
+    font-size: 1.5em;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.heading {
+    max-width: 100%;
+}
+
+.welcome {
+    width: 80%;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
