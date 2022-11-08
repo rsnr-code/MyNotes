@@ -12,7 +12,7 @@
 
 Demo Account credentials: demo@demo.com (user) // demodemo (password)
 <p align="center">
-     <img src="https://imgur.com/58kWEJz.png">
+     <img src="https://imgur.com/hSuQ0rc.png">
 </p>
 
 ## Lessons Learned:
